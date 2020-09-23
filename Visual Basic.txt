@@ -1,0 +1,228 @@
+Tips for VB Programmers.
+
+1) 70% of the programs downloaded from here and other VB
+sites never use Option Explicit.
+
+VB's Explanation of Option Explicit.
+If used, the Option Explicit statement must appear
+in a module before any procedures.
+
+When Option Explicit appears in a module, you must
+explicitly declare all variables using the Dim,
+Private, Public, ReDim, or Static statements.
+If you attempt to use an undeclared variable name,
+an error occurs at compile time.
+
+If you don't use the Option Explicit statement,
+all undeclared variables are of Variant type (and
+Variants use more memory) unless the default type
+is otherwise specified with a Deftype statement.
+
+Note: Use Option Explicit to avoid incorrectly
+typing the name of an existing variable or to avoid
+confusion in code where the scope of the variable is
+not clear.
+
+I know by default VB doesn't put this command in.
+If you select, Tools/Options from the menu bar.
+Select the Edit Tab and Check the Require Variable
+Delaration Check box, then restart VB.
+
+Every New Form and Module will now have Option Explicit
+at the top. The old ones you will have to add
+Option Explicit to the top of each code window..
+
+2) The layout of the code isn't user friendly either.
+Everything is cramped up to save space. e.g.
+
+Private Sub PlacePicHolders(Index As Integer)
+Select Case Index
+Case 0: Pic(0).Top = 600
+Case 1, 2: Pic(Index).Top = 960
+Case 3 To 5: Pic(Index).Top = 1320
+Case 6 To 9: Pic(Index).Top = 1680
+Case 10 To 14: Pic(Index).Top = 2040
+Case 15 To 20: Pic(Index).Top = 2400
+End Select
+End Sub
+
+Instead of:
+
+Private Sub PlacePicHolders(Index As Integer)
+
+Select Case Index
+     Case 0
+	   Pic(0).Top = 600
+     Case 1, 2
+	   Pic(Index).Top = 960
+     Case 3 To 5
+	   Pic(Index).Top = 1320
+     Case 6 To 9
+	   Pic(Index).Top = 1680
+     Case 10 To 14
+	   Pic(Index).Top = 2040
+     Case 15 To 20
+	   Pic(Index).Top = 2400
+End Select
+
+End Sub
+
+3) Very few people use the indent (tab key) which makes
+the code not very easy to follow. There are VB keywords
+that need to be indented. For/Next, Select Case,
+If/Then/Else, With (Control), Do While/Loop, Type, etc.
+We used to get marked down on our VB exams if we didn't
+indent.
+
+e.g.
+
+Dim N As Integer
+
+For N = 1 To 5
+    If GV124(N) > 0 Then
+        Check1(GV124(N)).Value = vbChecked
+    End If
+Next N
+
+4) A tip for VB users. You will notice in the last example
+that I've added (Next N) at the end of the loop. I've been
+programming in Basic for 20 years. And I learned 20 years
+ago don't put the variable with the Next statement (Next N).
+I've also done Programming Visual Basic at College, and we
+were told us never use Next and the variable. Why, because
+For/Next Loops are slow anyway and put the Next N, slows
+it down even more. It will work faster without it.
+
+I used to have a program that tested the speed of For/Next loops.
+With and without the variable, and a timer showed that without
+was faster.
+
+5) People often use the following, thinking they will all be integers.
+
+Dim x, y, z As Integer
+
+Only the z will be an integer, z, y will be Variants. And
+variants use up more memory. Dimension each variable separately.
+
+Dim x As Integer, y  As Integer, z As Integer
+
+or 
+
+Dim x As Integer
+Dim y As Integer
+Dim z As Integer
+
+6) Control Names.
+Objects should be named with a consistent prefix that makes it
+easy to identify the type of object. Recommended conventions for
+some of the objects supported by Visual Basic are listed below.
+
+Control type			Prefix		Example
+		
+3D Panel			pnl		pnlGroup
+Animated button			ani		aniMailBox
+Check box			chk		chkReadOnly
+Combo box, drop-down list box	cbo		cboEnglish
+Command button			cmd		cmdExit
+Common dialog 			dlg		dlgFileOpen
+Communications 			com		comFax
+Control (used within
+procedures when the
+specific type is unknown)	ctr		ctrCurrent
+Data control			dat		datBiblio
+Data-bound combo box		dbcbo		dbcboLanguage
+Data-bound grid			dbgrd		dbgrdQueryResult
+Data-bound list box		dblst		dblstJobType
+Directory list box		dir		dirSource
+Drive list box			drv		drvTarget
+File list box			fil		filSource
+Form				frm		frmEntry
+Frame				fra		fraLanguage
+Gauge				gau		gauStatus
+Graph				gra		graRevenue
+Grid				grd		grdPrices
+Horizontal scroll bar		hsb		hsbVolume
+Image				img		imgIcon
+Key status			key		keyCaps
+Label				lbl		lblHelpMessage
+Line				lin		linVertical
+List box			lst		lstPolicyCodes
+MAPI message			mpm		mpmSentMessage
+MAPI session			mps		mpsSession
+MCI				mci		mciVideo
+MDI child form			mdi		mdiNote
+Menu				mnu		mnuFileOpen
+MS Flex grid			msg		msgClients
+MS Tab 				mst		mstFirst
+OLE				ole		oleWorksheet
+Outline 			out		outOrgChart
+Pen BEdit 			bed		bedFirstName
+Pen HEdit			hed		hedSignature
+Pen ink				ink		inkMap
+Picture				pic		picVGA
+Picture clip			clp		clpToolbar
+Report				rpt		rptQtr1Earnings
+Shape 				shp		shpCircle
+Spin 				spn		spnPages
+Text box			txt		txtLastName
+Timer				tmr		tmrAlarm
+UpDown				upd		updDirection
+Vertical scroll bar		vsb		vsbRate
+Slider				sld		sldScale
+ImageList			ils		ilsAllIcons
+TreeView			tre		treOrganization
+Toolbar				tlb		tlbActions
+TabStrip			tab		tabOptions
+StatusBar			sta		staDateTime
+ListView			lvw		lvwHeadings
+ProgressBar			prg		prgLoadFile
+RichTextBox			rtf		rtfReport
+
+Suggested Prefixes for Data Access Objects (DAO)
+Use the following prefixes to indicate Data Access Objects.
+Database object			Prefix		Example
+		
+Container			con		conReports
+Database			db		dbAccounts
+DBEngine			dbe		dbeJet
+Document			doc		docSalesReport
+Field				fld		fldAddress
+Group				grp		grpFinance
+Index				idx		idxAge
+Parameter			prm		prmJobCode
+QueryDef 			qry		qrySalesByRegion
+Recordset			rec		recForecast
+Relation			rel		relEmployeeDept
+TableDef			tbd		tbdCustomers
+User				usr		usrNew
+Workspace			wsp		wspMine
+
+
+These prefixes should be available in your Visual Basic Books Online (VB5).
+It all makes code and controls easy to follow.
+
+I know you may be saying I am knit picking, but code that
+is laid out properly is easy to follow. There is nothing worse
+that spending 30 minutes or an hour, altering the laying out
+the code, indenting and debugging before you get the program
+running. Especially without Option Explicit, thats my biggest
+gripe. Code that has Option Explicit at the top of each Form
+and Module saves a lot of debugging. Any code that I download
+and the layout is something reasonable the they get my vote.
+
+I know in Real world programming there are no indents to save
+size and speed. But PSC isn't a real programming world as such.
+Its here to give people ideas and tips they never thought about. 
+Therefore the code should be laid out correctly and easy to follow.
+
+I know everyone programmes the way they feel comfortable
+with, myself included. So it up to you if you take note of these
+suggestions. Sorry if I have bored you with these comments by
+thats how I have always programmed. And thats how you were tort
+to program at College. If you want some examples have a look
+at my page.
+
+http://www.planet-source-code.com/vb/scripts/BrowseCategoryOrSearchResults.asp?lngWId=1&blnAuthorSearch=TRUE&lngAuthorId=6638776705&strAuthorName=Keith%20Stanier&txtMaxNumberOfEntriesPerPage=25
+
+Have fun programmers.
+
